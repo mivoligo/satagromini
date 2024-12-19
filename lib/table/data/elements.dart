@@ -79,7 +79,7 @@ const elementsData = <Element>[
     abundance: 461000,
   ),
   Element(
-    name: 'Oxygen',
+    name: 'Fluorine',
     atomicNumber: 9,
     weight: 18.998,
     density: 0.001696,
