@@ -1,41 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:satagromini/poligons/controllers/polygon_list_controller.dart';
+import 'package:satagromini/poligons/controllers/single_polygon_controller.dart';
 
-class Controls extends StatelessWidget {
+class Controls extends ConsumerWidget {
   const Controls({
-    required this.hasPolygon,
-    required this.onRemoveLastPoint,
-    required this.onRemoveArea,
-    required this.onSaveArea,
     required this.onCenterLocation,
     super.key,
   });
 
-  final bool hasPolygon;
-  final VoidCallback onRemoveLastPoint;
-  final VoidCallback onRemoveArea;
-  final VoidCallback onSaveArea;
   final VoidCallback onCenterLocation;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final hasTemporaryPoints =
+        ref.watch(singlePolygonControllerProvider).isNotEmpty;
     return Column(
       children: [
-        if (hasPolygon) ...[
-          ElevatedButton(
-            onPressed: onRemoveLastPoint,
-            child: const Text('Remove last point'),
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: onRemoveArea,
-            child: const Text('Remove area'),
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: onSaveArea,
-            child: const Text('Save area'),
-          ),
-        ],
+        ElevatedButton(
+          onPressed: hasTemporaryPoints
+              ? ref
+                  .read(singlePolygonControllerProvider.notifier)
+                  .removeLastPoint
+              : null,
+          child: const Text('Remove last point'),
+        ),
+        const SizedBox(height: 8),
+        ElevatedButton(
+          onPressed: hasTemporaryPoints
+              ? ref
+                  .read(singlePolygonControllerProvider.notifier)
+                  .removeAllPoints
+              : null,
+          child: const Text('Remove area'),
+        ),
+        const SizedBox(height: 8),
+        ElevatedButton(
+          onPressed: hasTemporaryPoints
+              ? ref.read(polygonListControllerProvider.notifier).addPolygon
+              : null,
+          child: const Text('Save area'),
+        ),
         const SizedBox(height: 8),
         ElevatedButton(
           onPressed: onCenterLocation,
