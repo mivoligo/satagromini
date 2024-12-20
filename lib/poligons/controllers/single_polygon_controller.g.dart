@@ -6,22 +6,22 @@ part of 'single_polygon_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$singlePolygonControllerHash() =>
-    r'e57459f63f04a19f3dfd27131b04b2ae362096b3';
+String _$temporaryPolygonControllerHash() =>
+    r'2822ee2c15fdd3401e4425ae341444ef3aa7f267';
 
-/// See also [SinglePolygonController].
-@ProviderFor(SinglePolygonController)
-final singlePolygonControllerProvider =
-    AutoDisposeNotifierProvider<SinglePolygonController, List<LatLng>>.internal(
-  SinglePolygonController.new,
-  name: r'singlePolygonControllerProvider',
+/// See also [TemporaryPolygonController].
+@ProviderFor(TemporaryPolygonController)
+final temporaryPolygonControllerProvider = AutoDisposeNotifierProvider<
+    TemporaryPolygonController, List<LatLng>>.internal(
+  TemporaryPolygonController.new,
+  name: r'temporaryPolygonControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$singlePolygonControllerHash,
+      : _$temporaryPolygonControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SinglePolygonController = AutoDisposeNotifier<List<LatLng>>;
+typedef _$TemporaryPolygonController = AutoDisposeNotifier<List<LatLng>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

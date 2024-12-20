@@ -28,7 +28,7 @@ class _MapPageState extends State<MapPage> {
               builder: (context, ref, child) {
                 final polygonList = ref.watch(polygonListControllerProvider);
                 final temporaryPoints =
-                    ref.watch(singlePolygonControllerProvider);
+                    ref.watch(temporaryPolygonControllerProvider);
 
                 return FlutterMap(
                   options: MapOptions(
@@ -38,7 +38,7 @@ class _MapPageState extends State<MapPage> {
                     onTap: (tapPosition, point) {
                       print(point);
                       ref
-                          .read(singlePolygonControllerProvider.notifier)
+                          .read(temporaryPolygonControllerProvider.notifier)
                           .addPoint(point);
                     },
                   ),

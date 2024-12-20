@@ -13,14 +13,15 @@ class Controls extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hasTemporaryPoints =
-        ref.watch(singlePolygonControllerProvider).isNotEmpty;
+    final temporaryPoints = ref.watch(temporaryPolygonControllerProvider);
+    final hasTemporaryPoints = temporaryPoints.isNotEmpty;
+    final isPolygon = temporaryPoints.length >= 3;
     return Column(
       children: [
         ElevatedButton(
           onPressed: hasTemporaryPoints
               ? ref
-                  .read(singlePolygonControllerProvider.notifier)
+                  .read(temporaryPolygonControllerProvider.notifier)
                   .removeLastPoint
               : null,
           child: const Text('Remove last point'),
@@ -29,14 +30,14 @@ class Controls extends ConsumerWidget {
         ElevatedButton(
           onPressed: hasTemporaryPoints
               ? ref
-                  .read(singlePolygonControllerProvider.notifier)
+                  .read(temporaryPolygonControllerProvider.notifier)
                   .removeAllPoints
               : null,
           child: const Text('Remove area'),
         ),
         const SizedBox(height: 8),
         ElevatedButton(
-          onPressed: hasTemporaryPoints
+          onPressed: isPolygon
               ? ref.read(polygonListControllerProvider.notifier).addPolygon
               : null,
           child: const Text('Save area'),

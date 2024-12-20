@@ -7,7 +7,7 @@ part of 'polygon_list_controller.dart';
 // **************************************************************************
 
 String _$polygonListControllerHash() =>
-    r'0a3e5732b2d114f2bb83bc74b7bcc3181ced35d4';
+    r'8a1527e75a6230e08d5f789fd63072816beeaba1';
 
 /// See also [PolygonListController].
 @ProviderFor(PolygonListController)

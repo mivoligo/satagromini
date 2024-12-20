@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'single_polygon_controller.g.dart';
 
 @riverpod
-class SinglePolygonController extends _$SinglePolygonController {
+class TemporaryPolygonController extends _$TemporaryPolygonController {
   @override
   List<LatLng> build() {
     return [];
