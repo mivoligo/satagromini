@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:satagromini/poligons/controllers/polygon_list_controller.dart';
-import 'package:satagromini/poligons/controllers/single_polygon_controller.dart';
+import 'package:satagromini/map/controllers/polygon_list_controller.dart';
+import 'package:satagromini/map/controllers/single_polygon_controller.dart';
 
 class Controls extends ConsumerWidget {
   const Controls({

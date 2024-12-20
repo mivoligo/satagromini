@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:satagromini/poligons/controllers/single_polygon_controller.dart';
-import 'package:satagromini/poligons/models/polygon.dart';
+import 'package:satagromini/map/controllers/single_polygon_controller.dart';
+import 'package:satagromini/map/models/polygon.dart';
 
 part 'polygon_list_controller.g.dart';
 

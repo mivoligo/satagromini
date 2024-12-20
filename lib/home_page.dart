@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:satagromini/poligons/views/map_page.dart';
+import 'package:satagromini/map/views/map_page.dart';
 import 'package:satagromini/table/views/table_page.dart';
 
 class HomePage extends StatelessWidget {

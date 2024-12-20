@@ -2,16 +2,12 @@ import 'dart:math';
 
 import 'package:latlong2/latlong.dart';
 
-class SortedPolygon {
-  SortedPolygon({
-    required List<LatLng> points,
-  }) : points = _sortPoints(points);
-
-  final List<LatLng> points;
-}
-
-List<LatLng> _sortPoints(List<LatLng> points) {
-  if (points.length < 3) {
+/// Algorytm do sortowania punktów dla poligonu.
+/// Zapobiega przecinaniu się linii, ale przy skomplikowanych kształtach
+/// nie działa zbyt poprawnie, tzn. zmienia połączenia wierzchołków ze względu
+/// na przesuwający się "środek ciężkości" (centroidLat, centroidLng)
+List<LatLng> sortPoints(List<LatLng> points) {
+  if (points.length <= 3) {
     return points;
   }
 
