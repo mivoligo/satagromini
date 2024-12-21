@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:satagromini/map/controllers/location_controller.dart';
 import 'package:satagromini/map/controllers/polygon_list_controller.dart';
 import 'package:satagromini/map/controllers/single_polygon_controller.dart';
+import 'package:satagromini/map/services/geo_location_service.dart';
 
 class Controls extends ConsumerWidget {
-  const Controls({
-    required this.onCenterLocation,
-    super.key,
-  });
-
-  final VoidCallback onCenterLocation;
+  const Controls({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,7 +42,13 @@ class Controls extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         ElevatedButton(
-          onPressed: onCenterLocation,
+          onPressed: () async {
+            final location =
+                await ref.read(locationServiceProvider).getLocation();
+            ref
+                .read(mapControllerProvider)
+                .move(LatLng(location.latitude, location.longitude), 18);
+          },
           child: const Text('Center location'),
         ),
         const SizedBox(height: 8),

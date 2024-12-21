@@ -16,14 +16,12 @@ class _MapPageState extends State<MapPage> {
       appBar: AppBar(
         title: const Text('Map'),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          const Expanded(
+          Expanded(
             child: MapView(),
           ),
-          Controls(
-            onCenterLocation: () {},
-          ),
+          Controls(),
         ],
       ),
     );

@@ -1,27 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'polygon_list_controller.dart';
+part of 'geo_location_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$polygonListControllerHash() =>
-    r'd9b8aac6df3d1b801918bc9dcb5c4f5288dec851';
+String _$locationServiceHash() => r'd0bf3bfcf805673b5482ebf0ebbb7dee11caac57';
 
-/// See also [PolygonListController].
-@ProviderFor(PolygonListController)
-final polygonListControllerProvider = AutoDisposeNotifierProvider<
-    PolygonListController, List<SortedPolygon>>.internal(
-  PolygonListController.new,
-  name: r'polygonListControllerProvider',
+/// See also [locationService].
+@ProviderFor(locationService)
+final locationServiceProvider = AutoDisposeProvider<LocationService>.internal(
+  locationService,
+  name: r'locationServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$polygonListControllerHash,
+      : _$locationServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PolygonListController = AutoDisposeNotifier<List<SortedPolygon>>;
+typedef LocationServiceRef = AutoDisposeProviderRef<LocationService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
