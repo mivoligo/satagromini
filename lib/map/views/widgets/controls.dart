@@ -4,7 +4,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:satagromini/map/controllers/location_controller.dart';
 import 'package:satagromini/map/controllers/polygon_list_controller.dart';
 import 'package:satagromini/map/controllers/temporary_polygon_controller.dart';
-import 'package:satagromini/map/services/geo_location_service.dart';
 
 class Controls extends ConsumerWidget {
   const Controls({super.key});
