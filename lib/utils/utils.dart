@@ -11,14 +11,18 @@ List<LatLng> sortPoints(List<LatLng> points) {
     return points;
   }
 
+  final copyOfPoints = [...points];
+
   final centroidLat =
-      points.map((p) => p.latitude).reduce((a, b) => a + b) / points.length;
+      copyOfPoints.map((p) => p.latitude).reduce((a, b) => a + b) /
+          copyOfPoints.length;
   final centroidLng =
-      points.map((p) => p.longitude).reduce((a, b) => a + b) / points.length;
-  points.sort((a, b) {
+      copyOfPoints.map((p) => p.longitude).reduce((a, b) => a + b) /
+          copyOfPoints.length;
+  copyOfPoints.sort((a, b) {
     double angleA = atan2(a.longitude - centroidLng, a.latitude - centroidLat);
     double angleB = atan2(b.longitude - centroidLng, b.latitude - centroidLat);
     return angleA.compareTo(angleB);
   });
-  return points;
+  return copyOfPoints;
 }
