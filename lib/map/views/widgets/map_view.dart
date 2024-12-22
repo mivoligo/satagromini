@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:satagromini/map/controllers/location_controller.dart';
 import 'package:satagromini/map/controllers/polygon_list_controller.dart';
 import 'package:satagromini/map/controllers/temporary_polygon_controller.dart';
-import 'package:satagromini/map/services/geo_location_service.dart';
+import 'package:satagromini/map/models/location.dart';
 import 'package:satagromini/map/views/widgets/location_marker.dart';
 import 'package:satagromini/utils/utils.dart';
 
@@ -14,76 +14,69 @@ class MapView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const startingLocation = Location.start();
     final polygonList = ref.watch(polygonListControllerProvider);
     final temporaryPoints = ref.watch(temporaryPolygonControllerProvider);
-    final currentLocation = ref.watch(locationStreamProvider);
     final mapController = ref.watch(mapControllerProvider);
-    return switch (currentLocation) {
-      AsyncData(:final value) => FlutterMap(
-          mapController: mapController,
-          options: MapOptions(
-            initialCenter: LatLng(value.latitude, value.longitude),
-            initialZoom: 18,
-            onTap: (_, point) {
-              ref
-                  .read(temporaryPolygonControllerProvider.notifier)
-                  .addPoint(point);
-            },
-          ),
-          children: [
-            TileLayer(
-              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: 'com.example.app',
+
+    ref.listen(
+      firstValidLocationProvider,
+      (previous, next) {
+        next.whenData((location) => ref
+            .read(mapControllerProvider)
+            .move(LatLng(location.latitude, location.longitude), 18));
+      },
+    );
+
+    return FlutterMap(
+      mapController: mapController,
+      options: MapOptions(
+        initialCenter: LatLng(
+          startingLocation.latitude,
+          startingLocation.longitude,
+        ),
+        initialZoom: 18,
+        onTap: (_, point) {
+          ref.read(temporaryPolygonControllerProvider.notifier).addPoint(point);
+        },
+      ),
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.app',
+        ),
+        PolygonLayer(
+          polygons: [
+            ...polygonList.indexed.map(
+              (e) => Polygon(
+                points: e.$2.points,
+                borderStrokeWidth: 2,
+                borderColor: Colors.primaries[e.$1 % Colors.primaries.length],
+                color: Colors.black26,
+              ),
             ),
-            PolygonLayer(
-              polygons: [
-                ...polygonList.indexed.map(
-                  (e) => Polygon(
-                    points: e.$2.points,
-                    borderStrokeWidth: 2,
-                    borderColor:
-                        Colors.primaries[e.$1 % Colors.primaries.length],
-                    color: Colors.black26,
-                  ),
-                ),
-                if (temporaryPoints.isNotEmpty)
-                  Polygon(
-                    points: sortPoints(temporaryPoints),
-                    borderColor: Colors.red,
-                    borderStrokeWidth: 2,
-                  ),
-              ],
-            ),
-            MarkerLayer(
-              markers: temporaryPoints
-                  .map(
-                    (e) => Marker(
-                      point: e,
-                      child: Container(color: Colors.red),
-                      width: 8,
-                      height: 8,
-                    ),
-                  )
-                  .toList(),
-            ),
-            const LocationMarker(),
+            if (temporaryPoints.isNotEmpty)
+              Polygon(
+                points: sortPoints(temporaryPoints),
+                borderColor: Colors.red,
+                borderStrokeWidth: 2,
+              ),
           ],
         ),
-      AsyncError() => Center(
-          child: Column(
-            children: [
-              Text('Please enable location service on your device'),
-              ElevatedButton(onPressed: () async {
-               await  ref.read(locationServiceProvider).getLocation();
-               ref.read(locationServiceProvider).getLocationStream();
-                // ref
-                //     .read(mapControllerProvider)
-                //     .move(LatLng(location.latitude, location.longitude), 18);
-              }, child: Text('Try again'))
-            ],
-          ),
+        MarkerLayer(
+          markers: temporaryPoints
+              .map(
+                (e) => Marker(
+                  point: e,
+                  child: Container(color: Colors.red),
+                  width: 8,
+                  height: 8,
+                ),
+              )
+              .toList(),
         ),
-      _ => const Center(child: CircularProgressIndicator()),
-    };
+        const LocationMarker(),
+      ],
+    );
   }
 }

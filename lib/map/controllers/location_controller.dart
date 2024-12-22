@@ -13,3 +13,8 @@ MapController mapController(Ref ref) => MapController();
 Stream<Location> locationStream(Ref ref) {
   return ref.watch(locationServiceProvider).getLocationStream();
 }
+
+@riverpod
+Stream<Location> firstValidLocation(Ref ref) {
+  return ref.watch(locationServiceProvider).getLocationStream().take(1);
+}
