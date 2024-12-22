@@ -21,16 +21,27 @@ class _TableViewState extends State<TableView> {
       bottomMargin: 0,
       columns: [
         DataColumn2(
-          label: const Text('Element'),
+          label: const Row(
+            children: [
+              Text('Element'),
+              Icon(Icons.unfold_more),
+            ],
+          ),
           size: ColumnSize.M,
-          fixedWidth: 80,
-          onSort: sort,
+          fixedWidth: 120,
+          onSort: _sort,
         ),
         ...elementsData.indexed.map(
           (indexedList) => DataColumn2(
-            label: Text('${indexedList.$1 + 1}'),
-            // numeric: true,
-            onSort: sort,
+            label: Row(
+              children: [
+                Text('${indexedList.$1 + 1}'),
+                const Icon(Icons.unfold_more),
+              ],
+            ),
+            numeric: true,
+            fixedWidth: indexedList.$1 == 2 ? 90 : null,
+            onSort: _sort,
           ),
         ),
       ],
@@ -58,6 +69,7 @@ class _TableViewState extends State<TableView> {
       headingRowColor: const WidgetStatePropertyAll(Colors.lightBlue),
       fixedColumnsColor: Colors.lightGreen,
       isHorizontalScrollBarVisible: true,
+      isVerticalScrollBarVisible: true,
       sortAscending: sortAscending,
       sortColumnIndex: sortColumnIndex,
       minWidth: 700,
@@ -65,7 +77,7 @@ class _TableViewState extends State<TableView> {
     );
   }
 
-  void sort(int columnIndex, bool ascending) {
+  void _sort(int columnIndex, bool ascending) {
     setState(() {
       sortAscending = ascending;
       sortColumnIndex = columnIndex;
