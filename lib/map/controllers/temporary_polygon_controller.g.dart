@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'single_polygon_controller.dart';
+part of 'temporary_polygon_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator

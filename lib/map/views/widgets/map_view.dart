@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:satagromini/map/controllers/location_controller.dart';
 import 'package:satagromini/map/controllers/polygon_list_controller.dart';
-import 'package:satagromini/map/controllers/single_polygon_controller.dart';
+import 'package:satagromini/map/controllers/temporary_polygon_controller.dart';
+import 'package:satagromini/map/services/geo_location_service.dart';
 import 'package:satagromini/map/views/widgets/location_marker.dart';
 import 'package:satagromini/utils/utils.dart';
 
@@ -15,7 +16,7 @@ class MapView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final polygonList = ref.watch(polygonListControllerProvider);
     final temporaryPoints = ref.watch(temporaryPolygonControllerProvider);
-    final currentLocation = ref.watch(locationControllerProvider);
+    final currentLocation = ref.watch(locationStreamProvider);
     final mapController = ref.watch(mapControllerProvider);
     return switch (currentLocation) {
       AsyncData(:final value) => FlutterMap(
@@ -38,11 +39,12 @@ class MapView extends ConsumerWidget {
               polygons: [
                 ...polygonList.indexed.map(
                   (e) => Polygon(
-                      points: e.$2.points,
-                      borderStrokeWidth: 2,
-                      borderColor:
-                          Colors.primaries[e.$1 % Colors.primaries.length],
-                      color: Colors.black26),
+                    points: e.$2.points,
+                    borderStrokeWidth: 2,
+                    borderColor:
+                        Colors.primaries[e.$1 % Colors.primaries.length],
+                    color: Colors.black26,
+                  ),
                 ),
                 if (temporaryPoints.isNotEmpty)
                   Polygon(
@@ -64,12 +66,22 @@ class MapView extends ConsumerWidget {
                   )
                   .toList(),
             ),
-            LocationMarker(
-                latitude: value.latitude, longitude: value.longitude),
+            const LocationMarker(),
           ],
         ),
-      AsyncError() => const Center(
-          child: Text('Please enable location service on your device'),
+      AsyncError() => Center(
+          child: Column(
+            children: [
+              Text('Please enable location service on your device'),
+              ElevatedButton(onPressed: () async {
+               await  ref.read(locationServiceProvider).getLocation();
+               ref.read(locationServiceProvider).getLocationStream();
+                // ref
+                //     .read(mapControllerProvider)
+                //     .move(LatLng(location.latitude, location.longitude), 18);
+              }, child: Text('Try again'))
+            ],
+          ),
         ),
       _ => const Center(child: CircularProgressIndicator()),
     };

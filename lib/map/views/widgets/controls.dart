@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:satagromini/map/controllers/location_controller.dart';
 import 'package:satagromini/map/controllers/polygon_list_controller.dart';
-import 'package:satagromini/map/controllers/single_polygon_controller.dart';
+import 'package:satagromini/map/controllers/temporary_polygon_controller.dart';
 import 'package:satagromini/map/services/geo_location_service.dart';
 
 class Controls extends ConsumerWidget {

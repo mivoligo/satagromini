@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -32,6 +34,15 @@ class GeoLocationService implements LocationService {
 
     final position = await Geolocator.getCurrentPosition();
     return Location(latitude: position.latitude, longitude: position.longitude);
+  }
+
+  @override
+  Stream<Location> getLocationStream() {
+    return Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(),
+    ).map(
+      (event) => Location(latitude: event.latitude, longitude: event.longitude),
+    );
   }
 }
 

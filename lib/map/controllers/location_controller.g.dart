@@ -21,22 +21,20 @@ final mapControllerProvider = AutoDisposeProvider<MapController>.internal(
 );
 
 typedef MapControllerRef = AutoDisposeProviderRef<MapController>;
-String _$locationControllerHash() =>
-    r'f8e85faaaa4870ea53bcc4a16b453c534a4a05b6';
+String _$locationStreamHash() => r'0ff83e749c8c191a355dec245770b743dd33b057';
 
-/// See also [LocationController].
-@ProviderFor(LocationController)
-final locationControllerProvider =
-    AutoDisposeAsyncNotifierProvider<LocationController, Location>.internal(
-  LocationController.new,
-  name: r'locationControllerProvider',
+/// See also [locationStream].
+@ProviderFor(locationStream)
+final locationStreamProvider = AutoDisposeStreamProvider<Location>.internal(
+  locationStream,
+  name: r'locationStreamProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$locationControllerHash,
+      : _$locationStreamHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LocationController = AutoDisposeAsyncNotifier<Location>;
+typedef LocationStreamRef = AutoDisposeStreamProviderRef<Location>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

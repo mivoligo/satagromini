@@ -1,7 +1,7 @@
 import 'package:latlong2/latlong.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'single_polygon_controller.g.dart';
+part 'temporary_polygon_controller.g.dart';
 
 @riverpod
 class TemporaryPolygonController extends _$TemporaryPolygonController {
