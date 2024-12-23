@@ -1,10 +1,10 @@
-import 'package:latlong2/latlong.dart';
+import 'package:satagromini/map/models/location.dart';
 import 'package:satagromini/utils/utils.dart';
 
 class SortedPolygon {
   SortedPolygon({
-    required List<LatLng> points,
+    required List<Location> points,
   }) : points = sortPoints(points);
 
-  final List<LatLng> points;
+  final List<Location> points;
 }

@@ -1,16 +1,16 @@
-import 'package:latlong2/latlong.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:satagromini/map/models/location.dart';
 
 part 'temporary_polygon_controller.g.dart';
 
 @riverpod
 class TemporaryPolygonController extends _$TemporaryPolygonController {
   @override
-  List<LatLng> build() {
+  List<Location> build() {
     return [];
   }
 
-  void addPoint(LatLng point) {
+  void addPoint(Location point) {
     state = [...state, point];
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:satagromini/map/models/location.dart';
-import 'package:satagromini/map/models/location_permission.dart';
+import 'package:satagromini/map/models/location_permission_status.dart';
 import 'package:satagromini/map/services/geo_location_service.dart';
 import 'package:satagromini/map/services/location_service.dart';
 
@@ -27,11 +27,11 @@ Stream<Location> firstValidLocation(Ref ref) {
 @riverpod
 class LocationPermissionsState extends _$LocationPermissionsState {
   @override
-  Future<LocationPermission> build() async {
+  Future<LocationPermissionStatus> build() async {
     final locationService = ref.watch(locationServiceProvider);
     final isLocationTurnedOn = await locationService.isLocationTurnedOn();
     final isPermissionGranted = await locationService.isPermissionGranted();
-    return LocationPermission(
+    return LocationPermissionStatus(
       isLocationTurnedOn: isLocationTurnedOn,
       isPermissionGranted: isPermissionGranted,
     );

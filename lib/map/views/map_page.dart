@@ -40,7 +40,7 @@ class MapPage extends ConsumerWidget {
                 textAlign: TextAlign.center,
               ),
             ],
-          _ => [const Center(child: CircularProgressIndicator())],
+          _ => [const Center(child: CircularProgressIndicator.adaptive())],
         },
       ),
     );

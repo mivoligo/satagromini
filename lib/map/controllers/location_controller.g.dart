@@ -68,12 +68,12 @@ final firstValidLocationProvider = AutoDisposeStreamProvider<Location>.internal(
 
 typedef FirstValidLocationRef = AutoDisposeStreamProviderRef<Location>;
 String _$locationPermissionsStateHash() =>
-    r'6fe83d856a759478064e6fd2d0082ef6733a77f3';
+    r'4d345f64f8dde268e7bae0c376336dd5c68daf3a';
 
 /// See also [LocationPermissionsState].
 @ProviderFor(LocationPermissionsState)
 final locationPermissionsStateProvider = AutoDisposeAsyncNotifierProvider<
-    LocationPermissionsState, LocationPermission>.internal(
+    LocationPermissionsState, LocationPermissionStatus>.internal(
   LocationPermissionsState.new,
   name: r'locationPermissionsStateProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -84,6 +84,6 @@ final locationPermissionsStateProvider = AutoDisposeAsyncNotifierProvider<
 );
 
 typedef _$LocationPermissionsState
-    = AutoDisposeAsyncNotifier<LocationPermission>;
+    = AutoDisposeAsyncNotifier<LocationPermissionStatus>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

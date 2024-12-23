@@ -1,13 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:satagromini/map/models/location.dart';
 
 /// Algorytm do sortowania punktów dla poligonu.
 /// Zapobiega przecinaniu się linii, ale przy skomplikowanych kształtach
 /// nie działa zbyt poprawnie, tzn. zmienia połączenia wierzchołków ze względu
 /// na przesuwający się "środek ciężkości" (centroidLat, centroidLng)
-List<LatLng> sortPoints(List<LatLng> points) {
+List<Location> sortPoints(List<Location> points) {
   if (points.length <= 3) {
     return points;
   }

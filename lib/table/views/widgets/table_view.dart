@@ -81,40 +81,39 @@ class _TableViewState extends State<TableView> {
     setState(() {
       sortAscending = ascending;
       sortColumnIndex = columnIndex;
-      listOfElements = listOfElements
-        ..sort(
-          (a, b) {
-            final sortingValue = switch (columnIndex) {
-              1 => ascending
-                  ? a.atomicNumber.compareTo(b.atomicNumber)
-                  : b.atomicNumber.compareTo(a.atomicNumber),
-              2 => ascending
-                  ? a.weight.compareTo(b.weight)
-                  : b.weight.compareTo(a.weight),
-              3 => ascending
-                  ? a.density.compareTo(b.density)
-                  : b.density.compareTo(a.density),
-              4 => ascending
-                  ? a.meltingPoint.compareTo(b.meltingPoint)
-                  : b.meltingPoint.compareTo(a.meltingPoint),
-              5 => ascending
-                  ? a.boilingPoint.compareTo(b.boilingPoint)
-                  : b.boilingPoint.compareTo(a.boilingPoint),
-              6 => ascending
-                  ? a.heatCapacity.compareTo(b.heatCapacity)
-                  : b.heatCapacity.compareTo(a.heatCapacity),
-              7 => ascending
-                  ? a.electroNegativity.compareTo(b.electroNegativity)
-                  : b.electroNegativity.compareTo(a.electroNegativity),
-              8 => ascending
-                  ? a.abundance.compareTo(b.abundance)
-                  : b.abundance.compareTo(a.abundance),
-              _ =>
-                ascending ? a.name.compareTo(b.name) : b.name.compareTo(a.name),
-            };
-            return sortingValue;
-          },
-        );
+      listOfElements.sort(
+        (a, b) {
+          final sortingValue = switch (columnIndex) {
+            1 => ascending
+                ? a.atomicNumber.compareTo(b.atomicNumber)
+                : b.atomicNumber.compareTo(a.atomicNumber),
+            2 => ascending
+                ? a.weight.compareTo(b.weight)
+                : b.weight.compareTo(a.weight),
+            3 => ascending
+                ? a.density.compareTo(b.density)
+                : b.density.compareTo(a.density),
+            4 => ascending
+                ? a.meltingPoint.compareTo(b.meltingPoint)
+                : b.meltingPoint.compareTo(a.meltingPoint),
+            5 => ascending
+                ? a.boilingPoint.compareTo(b.boilingPoint)
+                : b.boilingPoint.compareTo(a.boilingPoint),
+            6 => ascending
+                ? a.heatCapacity.compareTo(b.heatCapacity)
+                : b.heatCapacity.compareTo(a.heatCapacity),
+            7 => ascending
+                ? a.electroNegativity.compareTo(b.electroNegativity)
+                : b.electroNegativity.compareTo(a.electroNegativity),
+            8 => ascending
+                ? a.abundance.compareTo(b.abundance)
+                : b.abundance.compareTo(a.abundance),
+            _ =>
+              ascending ? a.name.compareTo(b.name) : b.name.compareTo(a.name),
+          };
+          return sortingValue;
+        },
+      );
     });
   }
 }

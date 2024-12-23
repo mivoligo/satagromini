@@ -1,5 +1,5 @@
-class LocationPermission {
-  LocationPermission({
+class LocationPermissionStatus {
+  LocationPermissionStatus({
     required this.isLocationTurnedOn,
     required this.isPermissionGranted,
   });
@@ -7,11 +7,11 @@ class LocationPermission {
   final bool isLocationTurnedOn;
   final bool isPermissionGranted;
 
-  LocationPermission copyWith({
+  LocationPermissionStatus copyWith({
     bool? isLocationTurnedOn,
     bool? isPermissionGranted,
   }) {
-    return LocationPermission(
+    return LocationPermissionStatus(
       isLocationTurnedOn: isLocationTurnedOn ?? this.isLocationTurnedOn,
       isPermissionGranted: isPermissionGranted ?? this.isPermissionGranted,
     );
@@ -19,7 +19,7 @@ class LocationPermission {
 
   @override
   bool operator ==(Object other) =>
-      other is LocationPermission &&
+      other is LocationPermissionStatus &&
       other.isLocationTurnedOn == isLocationTurnedOn &&
       other.isPermissionGranted == isPermissionGranted;
 

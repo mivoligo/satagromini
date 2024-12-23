@@ -7,12 +7,12 @@ part of 'temporary_polygon_controller.dart';
 // **************************************************************************
 
 String _$temporaryPolygonControllerHash() =>
-    r'2822ee2c15fdd3401e4425ae341444ef3aa7f267';
+    r'0b4a0e4a6cb3435b7703fd77815c375f9d25a402';
 
 /// See also [TemporaryPolygonController].
 @ProviderFor(TemporaryPolygonController)
 final temporaryPolygonControllerProvider = AutoDisposeNotifierProvider<
-    TemporaryPolygonController, List<LatLng>>.internal(
+    TemporaryPolygonController, List<Location>>.internal(
   TemporaryPolygonController.new,
   name: r'temporaryPolygonControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final temporaryPolygonControllerProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$TemporaryPolygonController = AutoDisposeNotifier<List<LatLng>>;
+typedef _$TemporaryPolygonController = AutoDisposeNotifier<List<Location>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -39,7 +39,7 @@ class LocationMarker extends ConsumerWidget {
             ),
           ),
         ]),
-      _ => const Center(child: CircularProgressIndicator())
+      _ => const Center(child: CircularProgressIndicator.adaptive())
     };
   }
 }

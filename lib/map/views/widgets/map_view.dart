@@ -39,7 +39,12 @@ class MapView extends ConsumerWidget {
         ),
         initialZoom: 18,
         onTap: (_, point) {
-          ref.read(temporaryPolygonControllerProvider.notifier).addPoint(point);
+          ref.read(temporaryPolygonControllerProvider.notifier).addPoint(
+                Location(
+                  latitude: point.latitude,
+                  longitude: point.longitude,
+                ),
+              );
         },
       ),
       children: [
@@ -51,7 +56,11 @@ class MapView extends ConsumerWidget {
           polygons: [
             ...polygonList.indexed.map(
               (e) => Polygon(
-                points: e.$2.points,
+                points: [
+                  ...e.$2.points.map(
+                    (location) => LatLng(location.latitude, location.longitude),
+                  )
+                ],
                 borderStrokeWidth: 2,
                 borderColor: polygonColors[e.$1 % polygonColors.length],
                 color: Colors.black26,
@@ -59,7 +68,11 @@ class MapView extends ConsumerWidget {
             ),
             if (temporaryPoints.isNotEmpty)
               Polygon(
-                points: sortPoints(temporaryPoints),
+                points: [
+                  ...sortPoints(temporaryPoints).map(
+                    (location) => LatLng(location.latitude, location.longitude),
+                  )
+                ],
                 borderColor: Colors.red,
                 borderStrokeWidth: 2,
               ),
@@ -68,8 +81,8 @@ class MapView extends ConsumerWidget {
         MarkerLayer(
           markers: [
             ...temporaryPoints.map(
-              (e) => Marker(
-                point: e,
+              (location) => Marker(
+                point: LatLng(location.latitude, location.longitude),
                 child: Container(color: Colors.red),
                 width: 8,
                 height: 8,

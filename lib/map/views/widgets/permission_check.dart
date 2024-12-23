@@ -18,12 +18,12 @@ class PermissionCheck extends StatelessWidget {
           isLocationTurnedOn
               ? 'Click the button to request location permission'
               : 'Please check if location service on your device is enabled and try again',
+          textAlign: TextAlign.center,
         ),
         ElevatedButton(
           onPressed: onPressed,
           child: Text(
             isLocationTurnedOn ? 'Request permission' : 'Try again',
-            textAlign: TextAlign.center,
           ),
         ),
       ],

@@ -11,7 +11,7 @@ class PolygonListController extends _$PolygonListController {
 
   void addPolygon() {
     final temporaryPoints = ref.read(temporaryPolygonControllerProvider);
-    final polygon = SortedPolygon(points: [...temporaryPoints]);
+    final polygon = SortedPolygon(points: temporaryPoints);
     ref.read(temporaryPolygonControllerProvider.notifier).removeAllPoints();
 
     state = [...state, polygon];
