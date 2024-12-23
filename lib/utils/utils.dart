@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
 /// Algorytm do sortowania punktów dla poligonu.
@@ -26,3 +27,14 @@ List<LatLng> sortPoints(List<LatLng> points) {
   });
   return copyOfPoints;
 }
+
+const polygonColors = <Color>[
+  Colors.red,
+  Colors.purple,
+  Colors.deepPurple,
+  Colors.blue,
+  Colors.teal,
+  Colors.lightGreen,
+  Colors.amber,
+  Colors.brown,
+];

@@ -21,10 +21,12 @@ class MapView extends ConsumerWidget {
 
     ref.listen(
       firstValidLocationProvider,
-      (previous, next) {
-        next.whenData((location) => ref
-            .read(mapControllerProvider)
-            .move(LatLng(location.latitude, location.longitude), 18));
+      (_, next) {
+        next.whenData(
+          (location) => ref
+              .read(mapControllerProvider)
+              .move(LatLng(location.latitude, location.longitude), 18),
+        );
       },
     );
 
@@ -51,7 +53,7 @@ class MapView extends ConsumerWidget {
               (e) => Polygon(
                 points: e.$2.points,
                 borderStrokeWidth: 2,
-                borderColor: Colors.primaries[e.$1 % Colors.primaries.length],
+                borderColor: polygonColors[e.$1 % polygonColors.length],
                 color: Colors.black26,
               ),
             ),
@@ -64,16 +66,16 @@ class MapView extends ConsumerWidget {
           ],
         ),
         MarkerLayer(
-          markers: temporaryPoints
-              .map(
-                (e) => Marker(
-                  point: e,
-                  child: Container(color: Colors.red),
-                  width: 8,
-                  height: 8,
-                ),
-              )
-              .toList(),
+          markers: [
+            ...temporaryPoints.map(
+              (e) => Marker(
+                point: e,
+                child: Container(color: Colors.red),
+                width: 8,
+                height: 8,
+              ),
+            )
+          ],
         ),
         const LocationMarker(),
       ],
